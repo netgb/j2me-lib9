@@ -1,0 +1,17 @@
+KEmulator Lite v0.9.8 Running...
+Get classes from bin
+Get class demo.lib9.DemoActivity
+Get class demo.lib9.DemoChangeState
+Get class demo.lib9.DemoFirst
+Get class demo.lib9.DemoHttpState
+Get class demo.lib9.DemoImageAndAnimationState
+Get class demo.lib9.DemoImageFontState
+Get class demo.lib9.DemoListState
+Get class demo.lib9.DemoMapState
+Get class demo.lib9.DemoMultiState
+Get class demo.lib9.DemoStateImageAndAnimation
+Get class demo.lib9.DemoStateImageFont
+Get class demo.lib9.DemoUseListState
+Launch MIDlet class: demo.lib9.DemoActivity
+Notify Destroyed
+Exiting Emulator
