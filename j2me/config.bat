@@ -16,7 +16,7 @@ set PATH=%TOOLS_DIR%;%PATH%
 set PROJ_NAME=lib9
 
 set MAIN_CLASS=CSmsAPI
-set GAME_NAME=9Lib
+set GAME_NAME=lib9
 
 set VENDOR=WareLoft
 

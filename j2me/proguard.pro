@@ -1,10 +1,10 @@
--injars  F:\work\9Lib\_process\_lib9.jar
--outjar F:\work\9Lib\_process\lib9.jar
--libraryjars F:\work\9Lib\tools\lib\cldcapi11.jar
--libraryjars F:\work\9Lib\tools\lib\midpapi20.jar
--libraryjars F:\work\9Lib\tools\lib\wma20.jar
--libraryjars F:\work\9Lib\tools\lib\jsr75.jar
--libraryjars F:\work\9Lib\tools\lib\mmapi.jar
+-injars F:\work\j2me-lib9\j2me\_process\_lib9.jar
+-outjar F:\work\j2me-lib9\j2me\_process\lib9.jar
+-libraryjars F:\work\j2me-lib9\j2me\tools\lib\cldcapi11.jar
+-libraryjars F:\work\j2me-lib9\j2me\tools\lib\midpapi20.jar
+-libraryjars F:\work\j2me-lib9\j2me\tools\lib\wma20.jar
+-libraryjars F:\work\j2me-lib9\j2me\tools\lib\jsr75.jar
+-libraryjars F:\work\j2me-lib9\j2me\tools\lib\mmapi.jar
 -printmapping Obfuscate_mapping.log
 -printusage Obfuscate_usage.log
 -keep public class * {

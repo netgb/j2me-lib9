@@ -7,7 +7,7 @@ if not exist %Jar_Dir% mkdir %Jar_Dir%
 
 
 @echo Preprocessing...
-copy src\lib9\*.java %process_Dir%\
+copy src\lib9\j2me\*.java %process_Dir%\
 copy src\res %process_Dir%\
 cd %process_Dir%
 for %%i in (*.java) do (
