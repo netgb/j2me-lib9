@@ -5,30 +5,31 @@ import javax.microedition.lcdui.*;
 import lib9.j2me.*;
 
 public class DemoActivity extends MIDlet {
-    /** Called when the activity is first created. */
-    static Lib9 lib9;
-    public DemoActivity() {
-  	lib9 =new DemoFirst(this);
-//  	new DemoImageAndAnimationState(this);
-//  	new DemoImageFontState(this);
-//  	new DemoMapState(this);
-//  	new DemoMultiState(this);
-//  	new DemoHttpState(this);
-//  	new DemoUseListState(this);
-//  	new DemoChangeState(this);    	
-    }
+	/** Called when the activity is first created. */
+	static Lib9 lib9;
 
-    public void startApp() {
-        lib9.resumeApp();
-    }
+	public DemoActivity() {
+//		lib9 = new DemoFirst(this);
+//		lib9 = new DemoImageAndAnimationState(this);
+//		lib9 = new DemoImageFontState(this);
+//		lib9 = new DemoMapState(this);
+//		lib9 = new DemoMultiState(this);
+//		lib9 = new DemoHttpState(this);
+//		lib9 = new DemoUseListState(this);
+		lib9 = new DemoChangeState(this);
+	}
 
-    public void pauseApp() {
-        lib9.pauseApp();
-    }
+	public void startApp() {
+		lib9.resumeApp();
+	}
 
-    public void destroyApp(boolean unconditional) {
-        if (lib9 != null) {
-            lib9.quitApp();
-        }
-    }
+	public void pauseApp() {
+		lib9.pauseApp();
+	}
+
+	public void destroyApp(boolean unconditional) {
+		if (lib9 != null) {
+			lib9.quitApp();
+		}
+	}
 }

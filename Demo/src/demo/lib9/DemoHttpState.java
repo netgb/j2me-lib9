@@ -43,7 +43,7 @@ public class DemoHttpState extends Lib9 implements L9IState {
                 byte[] bin = L9Util.getIntBytes(K_Status_Being_Get);
                 //注意联网测试，在android模拟器中使用10.0.2.2代表本机，类似pc上的localhost
                 //l9http.openHttp("http://localhost/Lib9/testHttp.aspx", bin);
-                l9http.openHttp("http://10.0.2.2/lib9/testHttp.aspx", bin);
+                l9http.openHttp("http://localhost/lib9/testHttp.aspx", bin);
             }
             if (isKeyPressed(K_KEY_NUM3)) {
                 iStatus = K_Status_Being_Send;
@@ -56,7 +56,7 @@ public class DemoHttpState extends Lib9 implements L9IState {
               //注意联网测试，在android模拟器中使用10.0.2.2代表本机，类似pc上的localhost
 //                l9http.openHttp("http://localhost/Lib9/testHttp.aspx",
 //                                out.getBytes());
-                l9http.openHttp("http://10.0.2.2/lib9/testHttp.aspx",
+                l9http.openHttp("http://localhost/lib9/testHttp.aspx",
                         out.getBytes());
             }
         } else {

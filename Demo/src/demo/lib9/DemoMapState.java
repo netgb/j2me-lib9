@@ -130,7 +130,7 @@ public class DemoMapState extends Lib9 implements L9IState {
 
         //绘制主角,为了简单实用一个矩形来代表主角，注意在绘制矩形的时候和j2me中的差异
         FG.setColor(0xFFFF0000);
-        FG.drawRect(hero.Left, hero.Top, hero.Left+hero.Width(), hero.Top+hero.Height());
+        FG.fillRect(hero.Left, hero.Top, hero.Width(), hero.Height());
 	}
 
 }
