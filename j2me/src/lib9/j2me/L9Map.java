@@ -107,7 +107,8 @@ public class L9Map {
 
         MapAnimations = new L9Animation[_nMap_Animations];
         for (int i = 0; i < MapAnimations.length; i++) {
-            MapAnimations[i] = new L9Animation(_sprite, i);
+        	int animID=getAnimationID(i);
+            MapAnimations[i] = new L9Animation(_sprite, animID);
         }
 
         _SCR_W = SCR_W;

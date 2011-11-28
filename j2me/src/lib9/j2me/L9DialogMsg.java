@@ -7,12 +7,8 @@ package lib9.j2me;
  */
 public class L9DialogMsg extends L9DialogBackground implements L9IState {
     public L9DialogMsg(Lib9 lib9) {
-        super(lib9.pFG);
-        this.lib9 = lib9;
+        super(lib9);
     }
-
-    private Lib9 lib9;
-    private L9Str l9Str;
     private String[] strArr;
 
     private int dialogX;
@@ -47,15 +43,15 @@ public class L9DialogMsg extends L9DialogBackground implements L9IState {
         msgTitle = title;
         //使用\n强制换行
         String sPaint = msg + "\n" + btnText;
-        if (l9Str == null) {
-            l9Str = new L9Str();
+        if (pL9Str == null) {
+            pL9Str = new L9Str();
         }
-        strArr = l9Str.updateString(sPaint, boxW - dialogLineTextOffsetX * 2);
+        strArr = pL9Str.updateString(sPaint, boxW - dialogLineTextOffsetX * 2);
         dialogW = boxW;
         dialogH = strArr.length * (L9Config.FONT_H + dialogLineSpace) +
                   dialogTopH + 5;
-        dialogX = (lib9.SCR_W - boxW) >> 1;
-        dialogY = (lib9.SCR_H - (dialogH + dialogTopH)) >> 1;
+        dialogX = (pLib9.SCR_W - boxW) >> 1;
+        dialogY = (pLib9.SCR_H - (dialogH + dialogTopH)) >> 1;
 //        setDialogStyle(4, 1, 0x0);
 //        setDialogBackgroundTopStype(dialogTopH, 0xffc080, 0x0,
 //                                    L9Str.K_Line_Align_Center);
@@ -102,35 +98,35 @@ public class L9DialogMsg extends L9DialogBackground implements L9IState {
     public void Paint() {
         //如果使用双缓冲，则用上一个状态的画面清屏，否则使用L9Config.dialogClearScreenColor的颜色清屏
         if (L9Config.bUseDoubleBuffer) {
-            lib9.drawBufferImage();
+            pLib9.drawBufferImage();
         } else {
-            lib9.fillScreen(L9Config.dialogClearScreenColor);
+            pLib9.fillScreen(L9Config.dialogClearScreenColor);
         }
 
         drawDialogBackground(dialogX, dialogY, dialogW, dialogH, msgTitle);
 
-        btnW = l9Str.getLineW(strArr[strArr.length - 1]) + 4;
+        btnW = pL9Str.getLineW(strArr[strArr.length - 1]) + 4;
         btnX = dialogX + ((dialogW - btnW) >> 1);
         btnY = dialogY + dialogTopH + (strArr.length - 1) * L9Config.FONT_H;
 
-        lib9.pFG.setColor(dialogBtnBgColor);
-        lib9.pFG.fillRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
+        pLib9.pFG.setColor(dialogBtnBgColor);
+        pLib9.pFG.fillRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
                               10);
-        lib9.pFG.setColor(dialogBtnBgBorderColor);
-        lib9.pFG.drawRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
+        pLib9.pFG.setColor(dialogBtnBgBorderColor);
+        pLib9.pFG.drawRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
                               10);
-        lib9.pFG.setColor(dialogLineColor);
+        pLib9.pFG.setColor(dialogLineColor);
         for (int i = 0; strArr != null && i < strArr.length; i++) {
             //绘制对话框内容，最后两行“是”与“否”居中绘制
             int YY = dialogY + dialogTopH +
                      i * (L9Config.FONT_H + dialogLineSpace) + 2;
-            int align = l9Str.K_Line_Align_Left;
+            int align = pL9Str.K_Line_Align_Left;
             if (i >= strArr.length - 1) {
-                align = l9Str.K_Line_Align_Center;
-                l9Str.drawLine(lib9.pFG, strArr[i], btnX, YY, btnW,
+                align = pL9Str.K_Line_Align_Center;
+                pL9Str.drawLine(pLib9.pFG, strArr[i], btnX, YY, btnW,
                                align);
             } else {
-                l9Str.drawLine(lib9.pFG, strArr[i],
+                pL9Str.drawLine(pLib9.pFG, strArr[i],
                                dialogX + dialogLineTextOffsetX, YY, dialogW,
                                align);
             }
@@ -142,39 +138,39 @@ public class L9DialogMsg extends L9DialogBackground implements L9IState {
      * @todo Implement this lib9.L9IState method
      */
     public void Update() {
-        if (lib9.isDragPointer()) {
+        if (pLib9.isDragPointer()) {
             if (_msgDragBeginX == -1) {
-                if (lib9.isInRect(lib9.getDragPointerX(),
-                                  lib9.getDragPointerY(),
+                if (pLib9.isInRect(pLib9.getDragPointerX(),
+                                  pLib9.getDragPointerY(),
                                   new L9Rect(dialogX, dialogY,
                                              dialogX + dialogW,
                                              dialogY + dialogH))) {
-                    _msgDragBeginX = lib9.getDragPointerX();
-                    _msgDragBeginY = lib9.getDragPointerY();
+                    _msgDragBeginX = pLib9.getDragPointerX();
+                    _msgDragBeginY = pLib9.getDragPointerY();
                 }
             } else {
-                dialogX += lib9.getDragPointerX() - _msgDragBeginX;
-                dialogY += lib9.getDragPointerY() - _msgDragBeginY;
+                dialogX += pLib9.getDragPointerX() - _msgDragBeginX;
+                dialogY += pLib9.getDragPointerY() - _msgDragBeginY;
 
-                _msgDragBeginX = lib9.getDragPointerX();
-                _msgDragBeginY = lib9.getDragPointerY();
+                _msgDragBeginX = pLib9.getDragPointerX();
+                _msgDragBeginY = pLib9.getDragPointerY();
             }
         } else {
             _msgDragBeginX = -1;
             _msgDragBeginY = -1;
         }
         //按5键返回上一个状态
-        if (lib9.isKeyPressed(Lib9.K_KEY_FIRE | Lib9.K_KEY_NUM5)) {
-            lib9.resetKey();
-            lib9.changeState(lib9.popState());
-            lib9.setGlobalGraphics(false);
+        if (pLib9.isKeyPressed(Lib9.K_KEY_FIRE | Lib9.K_KEY_NUM5)) {
+            pLib9.resetKey();
+            pLib9.changeState(pLib9.popState());
+            pLib9.setGlobalGraphics(false);
         }
         //支持触摸屏点击
-        if (lib9.getPointerX() > 0) {
-            if (lib9.isInRect(lib9.getPointerX(), lib9.getPointerY(),
+        if (pLib9.getPointerX() > 0) {
+            if (pLib9.isInRect(pLib9.getPointerX(), pLib9.getPointerY(),
                               new L9Rect(btnX, btnY, btnX + btnW,
                                          btnY + L9Config.FONT_H))) {
-                lib9.logicKeyPressed(lib9.getKeyCodeByLogicKey(Lib9.
+                pLib9.logicKeyPressed(pLib9.getKeyCodeByLogicKey(Lib9.
                         K_KEY_FIRE | Lib9.K_KEY_NUM5));
             }
         }

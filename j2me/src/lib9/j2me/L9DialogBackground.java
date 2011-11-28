@@ -8,11 +8,13 @@ import javax.microedition.lcdui.Graphics;
  * @version 1.0
  */
 public class L9DialogBackground {
-    private Graphics FG;
-    private L9Str l9Str;
-    public L9DialogBackground(Graphics FG) {
-        this.FG = FG;
-        l9Str = new L9Str();
+    public Graphics pFG;
+    public L9Str pL9Str;
+    public Lib9 pLib9;
+    public L9DialogBackground(Lib9 pLib9) {
+    	this.pLib9=pLib9;
+        pFG = pLib9.pFG;
+        pL9Str = pLib9.pL9Str;
     }
 
     /**
@@ -105,18 +107,18 @@ public class L9DialogBackground {
     public void drawDialogBackground(int dialogX, int dialogY, int dialogW,
                                      int dialogH,
                                      String title) {
-        FG.setColor(dialogBgColor);
-        FG.fillRoundRect(dialogX, dialogY, dialogW, dialogH, dialogArcWidth,
+        pFG.setColor(dialogBgColor);
+        pFG.fillRoundRect(dialogX, dialogY, dialogW, dialogH, dialogArcWidth,
                          dialogArcHeight);
-        FG.setColor(dialogBgBorderColor);
-        FG.drawRoundRect(dialogX, dialogY, dialogW, dialogH, dialogArcWidth,
+        pFG.setColor(dialogBgBorderColor);
+        pFG.drawRoundRect(dialogX, dialogY, dialogW, dialogH, dialogArcWidth,
                          dialogArcHeight);
         if (title != null) {
-            FG.setColor(dialogTopBgColor);
-            FG.fillRoundRect(dialogX + 1, dialogY + 1, dialogW - 2,
+            pFG.setColor(dialogTopBgColor);
+            pFG.fillRoundRect(dialogX + 1, dialogY + 1, dialogW - 2,
                              dialogTopH, dialogArcWidth, dialogArcHeight);
-            FG.setColor(dialogTitleColor);
-            l9Str.drawLine(FG, title, dialogX + getDialogTitleOffX(),
+            pFG.setColor(dialogTitleColor);
+            pL9Str.drawLine(pFG, title, dialogX + getDialogTitleOffX(),
                            dialogY + 2,
                            dialogW,
                            dialogTitleAlign);

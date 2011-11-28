@@ -6,9 +6,9 @@ package lib9.j2me;
  * @version 1.0
  */
 public class L9DialogYesNo extends L9DialogBackground implements L9IState {
-    private Lib9 lib9;
+    private Lib9 pLib9;
     private boolean _bYesNo;
-    private L9Str l9Str;
+    private L9Str pL9Str;
     private String[] strArr;
 
     private int dialogX;
@@ -44,14 +44,14 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
         msgTitle = title;
         //使用\n强制换行
         String sPaint = msg + "\n" + sYes + "\n" + sNo;
-        if (l9Str == null) {
-            l9Str = new L9Str();
+        if (pL9Str == null) {
+            pL9Str = new L9Str();
         }
-        strArr = l9Str.updateString(sPaint, boxW - 8);
+        strArr = pL9Str.updateString(sPaint, boxW - 8);
         dialogW = boxW;
         dialogH = strArr.length * L9Config.FONT_H + dialogTopH + 5;
-        dialogX = (lib9.SCR_W - boxW) >> 1;
-        dialogY = (lib9.SCR_H - (dialogH + dialogTopH)) >> 1;
+        dialogX = (pLib9.SCR_W - boxW) >> 1;
+        dialogY = (pLib9.SCR_H - (dialogH + dialogTopH)) >> 1;
 //        setDialogBackgroundTopStype(dialogTopH, 0xffc080, 0x0,
 //                                         L9Str.K_Line_Align_Center);
 //        setDialogBackgroundStyle(0xFFFFFF, 0x0, 10, 10);
@@ -68,8 +68,8 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
     }
 
     public L9DialogYesNo(Lib9 lib9) {
-        super(lib9.pFG);
-        this.lib9 = lib9;
+        super(lib9);
+        this.pLib9 = lib9;
     }
 
     /**
@@ -107,14 +107,14 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
     public void Paint() {
         //如果使用双缓冲，则用上一个状态的画面清屏，否则使用L9Config.dialogClearScreenColor的颜色清屏
         if (L9Config.bUseDoubleBuffer) {
-            lib9.drawBufferImage();
+            pLib9.drawBufferImage();
         } else {
-            lib9.fillScreen(L9Config.dialogClearScreenColor);
+            pLib9.fillScreen(L9Config.dialogClearScreenColor);
         }
 
         drawDialogBackground(dialogX, dialogY, dialogW, dialogH, msgTitle);
         //绘制上下移动的条的背景
-        lib9.pFG.setColor(dialogBarColor);
+        pLib9.pFG.setColor(dialogBarColor);
         int YY = dialogY + dialogTopH +
                  (strArr.length - 2) * (L9Config.FONT_H + dialogLineSpace);
 
@@ -124,22 +124,22 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
         if (!_bYesNo) {
             YY += L9Config.FONT_H;
         }
-        lib9.pFG.fillRoundRect(dialogX + 1, YY, dialogW - 2, L9Config.FONT_H + 2,
+        pLib9.pFG.fillRoundRect(dialogX + 1, YY, dialogW - 2, L9Config.FONT_H + 2,
                               10,
                               10);
 
-        lib9.pFG.setColor(dialogLineColor);
+        pLib9.pFG.setColor(dialogLineColor);
         for (int i = 0; strArr != null && i < strArr.length; i++) {
             //绘制对话框内容，最后两行“是”与“否”居中绘制
             YY = dialogY + dialogTopH + i * (L9Config.FONT_H + dialogLineSpace) +
                  2;
             if (i >= strArr.length - 2) {
-                l9Str.drawLine(lib9.pFG, strArr[i], dialogX, YY,
-                               dialogW, l9Str.K_Line_Align_Center);
+                pL9Str.drawLine(pLib9.pFG, strArr[i], dialogX, YY,
+                               dialogW, pL9Str.K_Line_Align_Center);
             } else {
-                l9Str.drawLine(lib9.pFG, strArr[i],
+                pL9Str.drawLine(pLib9.pFG, strArr[i],
                                dialogX + dialogLineTextOffsetX, YY,
-                               dialogW, l9Str.K_Line_Align_Left);
+                               dialogW, pL9Str.K_Line_Align_Left);
             }
         }
     }
@@ -149,54 +149,54 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
      * @todo Implement this lib9.L9IState method
      */
     public void Update() {
-        if (lib9.isDragPointer()) {
+        if (pLib9.isDragPointer()) {
             if (_msgDragBeginX == -1) {
-                if (lib9.isInRect(lib9.getDragPointerX(),
-                                  lib9.getDragPointerY(),
+                if (pLib9.isInRect(pLib9.getDragPointerX(),
+                                  pLib9.getDragPointerY(),
                                   new L9Rect(dialogX, dialogY,
                                              dialogX + dialogW,
                                              dialogY + dialogH))) {
-                    _msgDragBeginX = lib9.getDragPointerX();
-                    _msgDragBeginY = lib9.getDragPointerY();
+                    _msgDragBeginX = pLib9.getDragPointerX();
+                    _msgDragBeginY = pLib9.getDragPointerY();
                 }
             } else {
-                dialogX += lib9.getDragPointerX() - _msgDragBeginX;
-                dialogY += lib9.getDragPointerY() - _msgDragBeginY;
+                dialogX += pLib9.getDragPointerX() - _msgDragBeginX;
+                dialogY += pLib9.getDragPointerY() - _msgDragBeginY;
 
-                _msgDragBeginX = lib9.getDragPointerX();
-                _msgDragBeginY = lib9.getDragPointerY();
+                _msgDragBeginX = pLib9.getDragPointerX();
+                _msgDragBeginY = pLib9.getDragPointerY();
             }
         } else {
             _msgDragBeginX = -1;
             _msgDragBeginY = -1;
         }
-        if (lib9.isKeyPressed(Lib9.K_KEY_UP | Lib9.K_KEY_NUM2 |
+        if (pLib9.isKeyPressed(Lib9.K_KEY_UP | Lib9.K_KEY_NUM2 |
                               Lib9.K_KEY_DOWN | Lib9.K_KEY_NUM8)) {
             _bYesNo = !_bYesNo;
         }
-        if (lib9.isKeyPressed(Lib9.K_KEY_FIRE | Lib9.K_KEY_NUM5)) {
-            lib9.resetKey();
-            lib9.changeState(lib9.popState());
-            lib9.setGlobalGraphics(false);
+        if (pLib9.isKeyPressed(Lib9.K_KEY_FIRE | Lib9.K_KEY_NUM5)) {
+            pLib9.resetKey();
+            pLib9.changeState(pLib9.popState());
+            pLib9.setGlobalGraphics(false);
         }
-        if (lib9.getPointerX() > 0) {
-            if (lib9.isInRect(lib9.getPointerX(), lib9.getPointerY(),
+        if (pLib9.getPointerX() > 0) {
+            if (pLib9.isInRect(pLib9.getPointerX(), pLib9.getPointerY(),
                               new L9Rect(dialogX, btnY, dialogX + dialogW,
                                          btnY + L9Config.FONT_H))) {
                 if (!_bYesNo) {
                     _bYesNo = true;
                 } else {
-                    lib9.logicKeyPressed(lib9.getKeyCodeByLogicKey(Lib9.
+                    pLib9.logicKeyPressed(pLib9.getKeyCodeByLogicKey(Lib9.
                             K_KEY_FIRE | Lib9.K_KEY_NUM5));
                 }
-            } else if (lib9.isInRect(lib9.getPointerX(), lib9.getPointerY(),
+            } else if (pLib9.isInRect(pLib9.getPointerX(), pLib9.getPointerY(),
                                      new L9Rect(dialogX, btnY + L9Config.FONT_H,
                                                 dialogX + dialogW,
                                                 btnY + 2 * L9Config.FONT_H))) {
                 if (_bYesNo) {
                     _bYesNo = false;
                 } else {
-                    lib9.logicKeyPressed(lib9.getKeyCodeByLogicKey(Lib9.
+                    pLib9.logicKeyPressed(pLib9.getKeyCodeByLogicKey(Lib9.
                             K_KEY_FIRE |
                             Lib9.K_KEY_NUM5));
                 }

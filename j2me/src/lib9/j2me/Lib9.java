@@ -32,6 +32,9 @@ public class Lib9 extends Canvas implements Runnable {
             imgBuffer = Image.createImage(L9Config.SCR_W, L9Config.SCR_H);
             pFG = imgBuffer.getGraphics(); // FBackImage_G;
         }
+        
+        pL9Str=new L9Str();
+        
         setDisplay(app, this);
 
         setFps(L9Config.appFps);
@@ -112,6 +115,8 @@ public class Lib9 extends Canvas implements Runnable {
      */
     public Graphics pFG = null;
     private boolean bAppInPainting = false;
+    
+    public L9Str pL9Str=null;
     /**
      * 程序对象，可以通过这个对象获取或者设置程序层面的信息
      */

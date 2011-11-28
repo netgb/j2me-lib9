@@ -1,17 +1,28 @@
 KEmulator Lite v0.9.8 Running...
 Get classes from bin
-Get class demo.lib9.DemoActivity
-Get class demo.lib9.DemoChangeState
-Get class demo.lib9.DemoFirst
-Get class demo.lib9.DemoHttpState
-Get class demo.lib9.DemoImageAndAnimationState
-Get class demo.lib9.DemoImageFontState
-Get class demo.lib9.DemoListState
-Get class demo.lib9.DemoMapState
-Get class demo.lib9.DemoMultiState
-Get class demo.lib9.DemoStateImageAndAnimation
-Get class demo.lib9.DemoStateImageFont
-Get class demo.lib9.DemoUseListState
-Launch MIDlet class: demo.lib9.DemoActivity
+Get class lib9.j2me.DemoActivity
+Get class lib9.j2me.DemoFirst
+Get class lib9.j2me.L9Animation
+Get class lib9.j2me.L9Config
+Get class lib9.j2me.L9DateTime
+Get class lib9.j2me.L9DialogBackground
+Get class lib9.j2me.L9DialogMsg
+Get class lib9.j2me.L9DialogYesNo
+Get class lib9.j2me.L9Http$1
+Get class lib9.j2me.L9Http
+Get class lib9.j2me.L9InputStream
+Get class lib9.j2me.L9IState
+Get class lib9.j2me.L9Map
+Get class lib9.j2me.L9OutputStream
+Get class lib9.j2me.L9Rect
+Get class lib9.j2me.L9ResStr
+Get class lib9.j2me.L9Sound
+Get class lib9.j2me.L9Sprite
+Get class lib9.j2me.L9Store
+Get class lib9.j2me.L9Str
+Get class lib9.j2me.L9Util
+Get class lib9.j2me.Lib9
+Launch MIDlet class: lib9.j2me.DemoActivity
+>>2011-9-30
 Notify Destroyed
 Exiting Emulator
