@@ -30,7 +30,7 @@ public class Lib9 extends Canvas implements Runnable {
         SCR_H = L9Config.SCR_H;
         if (L9Config.bUseDoubleBuffer) {
             imgBuffer = Image.createImage(L9Config.SCR_W, L9Config.SCR_H);
-            FG = imgBuffer.getGraphics(); // FBackImage_G;
+            pFG = imgBuffer.getGraphics(); // FBackImage_G;
         }
         setDisplay(app, this);
 
@@ -57,9 +57,9 @@ public class Lib9 extends Canvas implements Runnable {
             if (imgBuffer == null) {
                 return;
             }
-            FG = imgBuffer.getGraphics(); // FBackImage_G;
+            pFG = imgBuffer.getGraphics(); // FBackImage_G;
         } else {
-            FG = g;
+            pFG = g;
         }
 
         appPaint();
@@ -100,7 +100,7 @@ public class Lib9 extends Canvas implements Runnable {
     /**
      * 程序的当前状态,就是实现了L9IState接口的对象
      */
-    public L9IState appState;
+    public L9IState pAppState;
     private boolean bFirstInitState = false;
     /**
      * 程序的主线程是否处理暂停的状态，处于中断中或者需要进入以用户交互的界面中往往需要设置为true
@@ -110,33 +110,33 @@ public class Lib9 extends Canvas implements Runnable {
     /**
      * 图形对象，用来显示程序的画面
      */
-    public Graphics FG = null;
+    public Graphics pFG = null;
     private boolean bAppInPainting = false;
     /**
      * 程序对象，可以通过这个对象获取或者设置程序层面的信息
      */
-    public static MIDlet Application;
+    public static MIDlet pApplication;
     /**
      * 应用程序的显示容器，程序所绘制的将在该对象上显示
      */
-    public static Displayable appDisplay;
+    public static Displayable pAppDisplay;
     /**
      * 应用程序在切换显示容器时，先保存当前的显示容器，这样便于以后返回到上一个显示容器
      */
-    public static Displayable lastAppDisplay;
+    public static Displayable pLastAppDisplay;
     /**
      * 设置程序和设置程序的显示容器
      * @param app MIDlet
      * @param disp Displayable
      */
     public void setDisplay(MIDlet app, Displayable disp) {
-        if (lastAppDisplay != disp) {
-            Application = app;
-            appDisplay = disp;
+        if (pLastAppDisplay != disp) {
+            pApplication = app;
+            pAppDisplay = disp;
             //记录上一次的显示容器
-            lastAppDisplay = Display.getDisplay(app).getCurrent();
+            pLastAppDisplay = Display.getDisplay(app).getCurrent();
 
-            Display.getDisplay(Application).setCurrent(appDisplay);
+            Display.getDisplay(pApplication).setCurrent(pAppDisplay);
             setFullScreenMode(true);
         }
     }
@@ -145,9 +145,9 @@ public class Lib9 extends Canvas implements Runnable {
      * 切换到上一次的显示容器，调用setDisplay设置显示容器的时候将会记录上一次显示容器，调用backLastDisplay返回上一次显示容器后会将lastAppDisplay=null
      */
     public void backLastDisplay() {
-        if (lastAppDisplay != null) {
-            setDisplay(Application, lastAppDisplay);
-            lastAppDisplay = null;
+        if (pLastAppDisplay != null) {
+            setDisplay(pApplication, pLastAppDisplay);
+            pLastAppDisplay = null;
         }
     }
 
@@ -165,7 +165,7 @@ public class Lib9 extends Canvas implements Runnable {
      */
     public void drawBufferImage() {
         if (bUseGlobalGraphics && L9Config.bUseDoubleBuffer) {
-            FG.drawImage(imgBuffer, 0, 0, 0);
+            pFG.drawImage(imgBuffer, 0, 0, 0);
         }
     }
 
@@ -178,7 +178,7 @@ public class Lib9 extends Canvas implements Runnable {
             quitApp();
             return;
         }
-        appState = state;
+        pAppState = state;
         resetKey(); //状态改变时应该清除按键
         state.Init();
         //表示已经进入到具体的状态了
@@ -191,8 +191,8 @@ public class Lib9 extends Canvas implements Runnable {
      * 必须实现的抽象类方法，用来执行应用的程序逻辑
      */
     public void appUpdate() {
-        if (appState != null) {
-            appState.Update();
+        if (pAppState != null) {
+            pAppState.Update();
         }
     }
 
@@ -200,8 +200,8 @@ public class Lib9 extends Canvas implements Runnable {
      * 必须实现的抽象类方法，绘制应用的画面
      */
     public void appPaint() {
-        if (appState != null) {
-            appState.Paint();
+        if (pAppState != null) {
+            pAppState.Paint();
         }
     }
     //////////////////////////State Manager//////////////////////////////////////////////
@@ -210,7 +210,7 @@ public class Lib9 extends Canvas implements Runnable {
      * 将状态机的当前状态入栈
      */
     public void pushState() {
-        pushState(appState);
+        pushState(pAppState);
     }
 
     /**
@@ -269,7 +269,7 @@ public class Lib9 extends Canvas implements Runnable {
     public void resumeApp() {
         if (bAppPaused) {
             bAppPaused = false;
-            setDisplay(Application, this);
+            setDisplay(pApplication, this);
             bInterruptNotify = true;
             repaint();
             resetKey();
@@ -280,8 +280,8 @@ public class Lib9 extends Canvas implements Runnable {
      * 退出程序
      */
     public void quitApp() {
-        appState = null;
-        Application.notifyDestroyed();
+        pAppState = null;
+        pApplication.notifyDestroyed();
     }
 
     /////////////////////////////////////////按键系统//////////////////////////////////////////////////////////
@@ -573,7 +573,7 @@ public class Lib9 extends Canvas implements Runnable {
 
     public void run() {
 //        Change_State(State_Main_Menu); //change state
-        while (appState != null || !bFirstInitState) {
+        while (pAppState != null || !bFirstInitState) {
             if (!bAppPaused) {
 //                System.out.println("appState=" + appState);
                 m_lBeginTime = System.currentTimeMillis();
@@ -732,7 +732,7 @@ public class Lib9 extends Canvas implements Runnable {
      * @param color int
      */
     public void fillScreen(int color) {
-        FG.setColor(color);
-        FG.fillRect(0, 0, SCR_W, SCR_H);
+        pFG.setColor(color);
+        pFG.fillRect(0, 0, SCR_W, SCR_H);
     }
 }

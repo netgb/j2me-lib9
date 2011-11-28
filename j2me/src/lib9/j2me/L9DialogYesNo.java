@@ -68,7 +68,7 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
     }
 
     public L9DialogYesNo(Lib9 lib9) {
-        super(lib9.FG);
+        super(lib9.pFG);
         this.lib9 = lib9;
     }
 
@@ -114,7 +114,7 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
 
         drawDialogBackground(dialogX, dialogY, dialogW, dialogH, msgTitle);
         //绘制上下移动的条的背景
-        lib9.FG.setColor(dialogBarColor);
+        lib9.pFG.setColor(dialogBarColor);
         int YY = dialogY + dialogTopH +
                  (strArr.length - 2) * (L9Config.FONT_H + dialogLineSpace);
 
@@ -124,20 +124,20 @@ public class L9DialogYesNo extends L9DialogBackground implements L9IState {
         if (!_bYesNo) {
             YY += L9Config.FONT_H;
         }
-        lib9.FG.fillRoundRect(dialogX + 1, YY, dialogW - 2, L9Config.FONT_H + 2,
+        lib9.pFG.fillRoundRect(dialogX + 1, YY, dialogW - 2, L9Config.FONT_H + 2,
                               10,
                               10);
 
-        lib9.FG.setColor(dialogLineColor);
+        lib9.pFG.setColor(dialogLineColor);
         for (int i = 0; strArr != null && i < strArr.length; i++) {
             //绘制对话框内容，最后两行“是”与“否”居中绘制
             YY = dialogY + dialogTopH + i * (L9Config.FONT_H + dialogLineSpace) +
                  2;
             if (i >= strArr.length - 2) {
-                l9Str.drawLine(lib9.FG, strArr[i], dialogX, YY,
+                l9Str.drawLine(lib9.pFG, strArr[i], dialogX, YY,
                                dialogW, l9Str.K_Line_Align_Center);
             } else {
-                l9Str.drawLine(lib9.FG, strArr[i],
+                l9Str.drawLine(lib9.pFG, strArr[i],
                                dialogX + dialogLineTextOffsetX, YY,
                                dialogW, l9Str.K_Line_Align_Left);
             }

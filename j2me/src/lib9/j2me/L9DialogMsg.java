@@ -7,7 +7,7 @@ package lib9.j2me;
  */
 public class L9DialogMsg extends L9DialogBackground implements L9IState {
     public L9DialogMsg(Lib9 lib9) {
-        super(lib9.FG);
+        super(lib9.pFG);
         this.lib9 = lib9;
     }
 
@@ -113,13 +113,13 @@ public class L9DialogMsg extends L9DialogBackground implements L9IState {
         btnX = dialogX + ((dialogW - btnW) >> 1);
         btnY = dialogY + dialogTopH + (strArr.length - 1) * L9Config.FONT_H;
 
-        lib9.FG.setColor(dialogBtnBgColor);
-        lib9.FG.fillRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
+        lib9.pFG.setColor(dialogBtnBgColor);
+        lib9.pFG.fillRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
                               10);
-        lib9.FG.setColor(dialogBtnBgBorderColor);
-        lib9.FG.drawRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
+        lib9.pFG.setColor(dialogBtnBgBorderColor);
+        lib9.pFG.drawRoundRect(btnX + 1, btnY, btnW - 2, L9Config.FONT_H + 2, 10,
                               10);
-        lib9.FG.setColor(dialogLineColor);
+        lib9.pFG.setColor(dialogLineColor);
         for (int i = 0; strArr != null && i < strArr.length; i++) {
             //绘制对话框内容，最后两行“是”与“否”居中绘制
             int YY = dialogY + dialogTopH +
@@ -127,10 +127,10 @@ public class L9DialogMsg extends L9DialogBackground implements L9IState {
             int align = l9Str.K_Line_Align_Left;
             if (i >= strArr.length - 1) {
                 align = l9Str.K_Line_Align_Center;
-                l9Str.drawLine(lib9.FG, strArr[i], btnX, YY, btnW,
+                l9Str.drawLine(lib9.pFG, strArr[i], btnX, YY, btnW,
                                align);
             } else {
-                l9Str.drawLine(lib9.FG, strArr[i],
+                l9Str.drawLine(lib9.pFG, strArr[i],
                                dialogX + dialogLineTextOffsetX, YY, dialogW,
                                align);
             }
