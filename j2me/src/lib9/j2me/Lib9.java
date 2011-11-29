@@ -575,7 +575,20 @@ public class Lib9 extends Canvas implements Runnable {
         _fps = fps;
         m_frameRate = ((long) 1000) / _fps;
     }
-
+    private long iBeginTick;
+    /**
+     * 开始计时标记,在游戏中经常需要用来计时
+     */
+    public void startTick(){
+    	iBeginTick=System.currentTimeMillis();
+    }
+    /**
+     * 返回自上一次计时标记开始到现在的时间总和,单位微妙
+     * @return
+     */
+    public long getTicks(){
+    	return System.currentTimeMillis()-iBeginTick;
+    }
     public void run() {
 //        Change_State(State_Main_Menu); //change state
         while (pAppState != null || !bFirstInitState) {

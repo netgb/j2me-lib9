@@ -378,6 +378,7 @@ public class L9Sprite {
             }
 
 //地图数据
+            int tt=in.readShort();
             int nMapSize = in.readInt();
             if (nMapSize > 0) { //如果存在地图的话就获取地图数据
                 _mapData = in.readBytes(nMapSize);

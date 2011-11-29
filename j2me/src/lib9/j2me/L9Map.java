@@ -56,10 +56,9 @@ public class L9Map {
         return bMoveEnd;
     }
 
-    public L9Map(L9Sprite sprite, int SCR_W, int SCR_H) {
-        _sprite = sprite;
-        L9InputStream in = new L9InputStream(sprite._mapData, 0,
-                                             sprite._mapData.length);
+    public L9Map(String file, int SCR_W, int SCR_H) {
+        spriteMap = new L9Sprite(file);
+        L9InputStream in = new L9InputStream(spriteMap._mapData, 0,spriteMap._mapData.length);
         Tile_W = in.readInt();
         Tile_H = in.readInt();
         nTiles_X = in.readInt();
@@ -108,7 +107,7 @@ public class L9Map {
         MapAnimations = new L9Animation[_nMap_Animations];
         for (int i = 0; i < MapAnimations.length; i++) {
         	int animID=getAnimationID(i);
-            MapAnimations[i] = new L9Animation(_sprite, animID);
+            MapAnimations[i] = new L9Animation(spriteMap, animID);
         }
 
         _SCR_W = SCR_W;
@@ -117,7 +116,7 @@ public class L9Map {
         initMap();
     }
 
-    private L9Sprite _sprite;
+    public L9Sprite spriteMap;
     private int _SCR_W;
     private int _SCR_H;
     /**
@@ -408,14 +407,14 @@ public class L9Map {
         int YY = getModuleY(map_module_index) - screenOffsetY;
         int flag = getModuleFlag(map_module_index);
         int pal = getModulePal(map_module_index);
-        _sprite.paintModule(g, module_index, XX, YY, flag, pal);
+        spriteMap.paintModule(g, module_index, XX, YY, flag, pal);
     }
 
     private void PaintMapFrame(Graphics g, int map_frame_index) {
         int frame_index = getFrameID(map_frame_index);
         int XX = getFrameX(map_frame_index) - screenOffsetX;
         int YY = getFrameY(map_frame_index) - screenOffsetY;
-        _sprite.paintFrame(g, frame_index, XX, YY);
+        spriteMap.paintFrame(g, frame_index, XX, YY);
     }
 
     private void UpdateMapAnimation(Graphics g, int map_anim_index) {
@@ -520,7 +519,7 @@ public class L9Map {
      */
     public int getModuleWidth(int index) {
         int id = getModuleID(index);
-        return _sprite.getModuleWidth(id);
+        return spriteMap.getModuleWidth(id);
     }
 
     /**
@@ -530,7 +529,7 @@ public class L9Map {
      */
     public int getModuleHeight(int index) {
         int id = getModuleID(index);
-        return _sprite.getModuleHeight(id);
+        return spriteMap.getModuleHeight(id);
     }
 
     /**
@@ -540,7 +539,7 @@ public class L9Map {
      */
     public boolean getModuleAlpha(int index) {
         int id = getModuleID(index);
-        return _sprite.getModuleAlpha(id);
+        return spriteMap.getModuleAlpha(id);
     }
 
     /**
@@ -549,7 +548,7 @@ public class L9Map {
      * @return int
      */
     public int getFrameWidth(int index) {
-        return _sprite.getFrameWidth(getFrameID(index));
+        return spriteMap.getFrameWidth(getFrameID(index));
     }
 
     /**
@@ -558,7 +557,7 @@ public class L9Map {
      * @return int
      */
     public int getFrameHeight(int index) {
-        return _sprite.getFrameHeight(getFrameID(index));
+        return spriteMap.getFrameHeight(getFrameID(index));
     }
 
     /**
@@ -567,7 +566,7 @@ public class L9Map {
      * @return int
      */
     public int getAnimationWidth(int index) {
-        return _sprite.Animations[getAnimationID(index)].getAnimWidth();
+        return spriteMap.Animations[getAnimationID(index)].getAnimWidth();
     }
 
     /**
@@ -576,7 +575,7 @@ public class L9Map {
      * @return int
      */
     public int getAnimationHeight(int index) {
-        return _sprite.Animations[getAnimationID(index)].getAnimHeight();
+        return spriteMap.Animations[getAnimationID(index)].getAnimHeight();
     }
 
     /**
@@ -585,7 +584,7 @@ public class L9Map {
      * @return int
      */
     public int getAnimationFPS(int index) {
-        return _sprite.Animations[getAnimationID(index)].getAnimFPS();
+        return spriteMap.Animations[getAnimationID(index)].getAnimFPS();
     }
 
     /**
@@ -594,8 +593,8 @@ public class L9Map {
     public void cacheMapBg() {
         for (int i = 0; i < Map_Tile_Module_ID.length; i++) {
             for (int j = 0; j < Map_Tile_Module_ID[i].length; j++) {
-                if (!_sprite.isCacheImage(Map_Tile_Module_ID[i][j], 0)) {
-                    _sprite.cacheImages(Map_Tile_Module_ID[i][j],
+                if (!spriteMap.isCacheImage(Map_Tile_Module_ID[i][j], 0)) {
+                    spriteMap.cacheImages(Map_Tile_Module_ID[i][j],
                                         Map_Tile_Module_ID[i][j],
                                         Map_Tile_Pal[i][j]);
                 }
@@ -726,7 +725,7 @@ public class L9Map {
                 int XX = j * Tile_W - screenOffsetX;
                 int YY = i * Tile_H - screenOffsetY;
                 //int index = i * nTiles_BufferX + j; //´æÔÚÎÊÌâ
-                _sprite.paintModule(g, Map_Tile_Module_ID[i][j], XX, YY,
+                spriteMap.paintModule(g, Map_Tile_Module_ID[i][j], XX, YY,
                                     Map_Tile_Flag[i][j], Map_Tile_Pal[i][j]);
             }
         }
