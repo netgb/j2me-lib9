@@ -11,7 +11,7 @@ public class L9Animation {
     public L9Animation(L9Sprite sprite, int animIndex) {
         _sprite = sprite;
         curAnim = animIndex;
-        setAnimPlayInfo(0, 0, false);
+        setAnimPlayInfo(0, 0, true);
     }
 
     /**
@@ -148,6 +148,11 @@ public class L9Animation {
         _curFrame = (short) curFrame;
         _curTime = (short) curTime;
         _bPlayOver = bPlayOver;
+    }
+    
+    public void rePlay(int anim_PosX, int anim_PosY){
+    	setAnim(anim_PosX,anim_PosY,false);
+    	setAnimPlayInfo(0,0,false);
     }
 
     /**
