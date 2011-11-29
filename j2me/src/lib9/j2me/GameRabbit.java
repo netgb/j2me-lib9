@@ -76,7 +76,7 @@ public class GameRabbit extends Lib9 implements L9IState {
 		pL9ResStr = new L9ResStr("/text", "gb2312");
 		pL9ResStr.setTokenAndSep("XXXX", ",");
 
-		Rms_Config_Read();
+		readRecord();
 		
 		pGameLogo = new GameRabbitLogo(this);
 
@@ -147,7 +147,7 @@ public class GameRabbit extends Lib9 implements L9IState {
 
 			bDontRestartMinigame=false;
 			
-			Minigame_Save();
+			saveGame();
 			
 			showMsgDialog(pL9ResStr.getResStr(K_TEXT_DIALOG_TITLE), sLine,
 					pL9ResStr.getResStr(K_TEXT_BUTTON_COMFIRE), 180);
@@ -399,7 +399,7 @@ public class GameRabbit extends Lib9 implements L9IState {
 	public int Last_Time;
 	final public String K_Rabbit_DB = "_rms_config";
 
-	public void Rms_Config_Read() {
+	public void readRecord() {
 		L9Store db = new L9Store(K_Rabbit_DB, L9Store.K_Store_Mode_Read);
 		// 第一次读取可能由于没有保存记录将会读取失败，所以这次进行了异常处理
 		try {
@@ -409,19 +409,19 @@ public class GameRabbit extends Lib9 implements L9IState {
 		}
 	}
 
-	public void Rms_Config_Write() {
+	public void writeRecord() {
 		L9Store db = new L9Store(K_Rabbit_DB, L9Store.K_Store_Mode_Write);
 		db.writeInt(Last_Scores);
 		db.writeInt(Last_Time);
 		db.Save();
 	}
 
-	public void Minigame_Save() {
+	public void saveGame() {
 		if (Minigame_Time > 0) {
 			if (Last_Time == 0) { // 第一次
 				Last_Scores = Minigame_Score;
 				Last_Time = (int) (Minigame_Time / 1000);
-				Rms_Config_Write();
+				writeRecord();
 			} else {
 				// 只要大于上次的记录就应该存储
 				double last = ((double) Last_Scores) / ((double) Last_Time);
@@ -430,7 +430,7 @@ public class GameRabbit extends Lib9 implements L9IState {
 				if (rs > last) {
 					Last_Scores = Minigame_Score;
 					Last_Time = (int) (Minigame_Time / 1000);
-					Rms_Config_Write();
+					writeRecord();
 				}
 			}
 		}
