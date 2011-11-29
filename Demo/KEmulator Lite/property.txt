@@ -1,5 +1,5 @@
 #KEmulator properties
-#Mon Nov 28 15:09:06 CST 2011
+#Tue Nov 29 17:08:04 CST 2011
 2D_Graphics_Enginge=SWT
 3D_Graphics_Enginge=LWJ
 AlwaysOnTop=false
@@ -27,8 +27,8 @@ KEY_LSOFT=-6
 KEY_RIGHT=-4
 KEY_RSOFT=-7
 KEY_UP=-1
-LocationX=806
-LocationY=272
+LocationX=664
+LocationY=228
 MAP_KEY_DOWN=DOWN
 MAP_KEY_LEFT=LEFT
 MAP_KEY_LSOFT=F1

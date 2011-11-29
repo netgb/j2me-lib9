@@ -1,7 +1,19 @@
 KEmulator Lite v0.9.8 Running...
 Get classes from bin
 Get class lib9.j2me.DemoActivity
+Get class lib9.j2me.DemoChangeState
 Get class lib9.j2me.DemoFirst
+Get class lib9.j2me.DemoHttpState
+Get class lib9.j2me.DemoImageAndAnimationState
+Get class lib9.j2me.DemoImageFontState
+Get class lib9.j2me.DemoListState
+Get class lib9.j2me.DemoMapState
+Get class lib9.j2me.DemoMultiState
+Get class lib9.j2me.DemoStateImageAndAnimation
+Get class lib9.j2me.DemoStateImageFont
+Get class lib9.j2me.DemoUseListState
+Get class lib9.j2me.GameRabbit
+Get class lib9.j2me.GameRabbitLogo
 Get class lib9.j2me.L9Animation
 Get class lib9.j2me.L9Config
 Get class lib9.j2me.L9DateTime
@@ -23,6 +35,17 @@ Get class lib9.j2me.L9Str
 Get class lib9.j2me.L9Util
 Get class lib9.j2me.Lib9
 Launch MIDlet class: lib9.j2me.DemoActivity
->>2011-9-30
+Custom.path.getResourceStream: rabbit (3499)
+Custom.path.getResourceStream: rabbitMap (45219)
+Custom.path.getResourceStream: text (599)
+Custom.path.getResourceStream: logo (10753)
+deleteRecordStore _rms_config
+deleteRecord _rms_config_1: OK
+openRecordStore _rms_config
+addRecord _rms_config_1
+deleteRecordStore _rms_config
+deleteRecord _rms_config_1: OK
+openRecordStore _rms_config
+addRecord _rms_config_1
 Notify Destroyed
 Exiting Emulator

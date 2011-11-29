@@ -1175,12 +1175,17 @@ public class L9Sprite {
                 for (int x = 0; x < w; x++) {
                     int index = _modules_data[module_id][y * w + x] & 0xFF;
                     //索引色要么透明要么不透明,没有中间的渐变
-                    rgb[y * w + x] = pal[index];
-                    if (rgb[y * w + x] == _trans[_cur_img]) {
-                        rgb[y * w + x] &= 0x00FFFFFF;
-                    } else {
-                        rgb[y * w + x] |= (0xFF << 24);
-                    }
+                    try {
+						rgb[y * w + x] = pal[index];
+						if (rgb[y * w + x] == _trans[_cur_img]) {
+						    rgb[y * w + x] &= 0x00FFFFFF;
+						} else {
+						    rgb[y * w + x] |= (0xFF << 24);
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 }
             }
             break;

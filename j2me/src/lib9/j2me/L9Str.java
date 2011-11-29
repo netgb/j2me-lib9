@@ -155,7 +155,7 @@ public class L9Str {
      */
     public static String[] splitStr(String str, String sep) {
         Vector v = new Vector();
-        while (str.length() > sep.length()) {
+        while (str.length() >= sep.length()) {
             str = trimStr(str, sep);
             int index = str.indexOf(sep);
             if (index == -1) {
